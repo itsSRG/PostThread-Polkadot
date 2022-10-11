@@ -8,10 +8,9 @@ from os import listdir
 from os.path import isfile, join
 
 substrate = SubstrateInterface(
-    url="ws://127.0.0.1:9944",
+    url="https://127.0.0.1:9944",
     ss58_format=42,
-    type_registry_preset='kusama'
-)
+    type_registry_preset='kusama')
 
 delegate = Keypair.create_from_uri('//Bob')
 client = ipfshttpclient.connect()
@@ -19,11 +18,14 @@ client = ipfshttpclient.connect()
 schemas = json.load(open("schemas.json"))
 
 def make_call(call_module, call_function, call_params, keypair, wait_for_inclusion=True, wait_for_finalization=False):
+    print('Hello0')
     call = substrate.compose_call(
         call_module=call_module,  
         call_function=call_function,
         call_params=call_params
     )
+
+    #("Schemas", "register_schema", {"schema": schema}, delegate, wait_for_inclusion=wait_for_inclusion, wait_for_finalization=wait_for_finalization)
 
     extrinsic = substrate.create_signed_extrinsic(call=call, keypair=keypair)
 
@@ -74,9 +76,11 @@ def addSchema(schema, check=True, create=True, wait_for_inclusion=True, wait_for
 def get_msa_id(wallet, create=False):
     msa_id = substrate.query(
         module='Msa',
-        storage_function='KeyInfoOf',
+        storage_function='MsaInfoOf',
         params=[wallet.ss58_address]
     ).value
+
+    # msa_id = None
     
     if not create:
         if msa_id is None:

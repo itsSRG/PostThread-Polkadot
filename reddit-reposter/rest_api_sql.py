@@ -32,13 +32,13 @@ bob = Keypair.create_from_uri('//Bob')
 
 loop = asyncio.new_event_loop()
 
-reddit_creds = json.load(open(".reddit_creds.json", "r"))
+# reddit_creds = json.load(open(".reddit_creds.json", "r"))
 reddit = praw.Reddit(
-    client_id=reddit_creds["client_id"],
-    client_secret=reddit_creds["client_secret"],
-    password=reddit_creds["password"],
-    user_agent=reddit_creds["user_agent"],
-    username=reddit_creds["username"],
+    client_id='spgzUhzQjed_iuH9ttfP2A',
+    client_secret='5hSWD4rtEMZsx3w64p9nr_fQupHffw',
+    password='H\}\Dq^+B^c4VS7@',
+    user_agent='trial',
+    username='monk-beast',
 )
 
 client = ipfshttpclient.connect()

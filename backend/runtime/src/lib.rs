@@ -272,7 +272,7 @@ impl pallet_daily_post::Config for Runtime {
 impl pallet_posts::Config for Runtime {
 	type Event = Event;
 	type Currency = Balances;
-	type MaxPosts = frane_support::pallet_prelude::ConstU32<100>;
+	type MaxPosts = frame_support::pallet_prelude::ConstU32<100>;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -292,6 +292,7 @@ construct_runtime!(
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-template in the runtime.
 		PostOfTheDay: pallet_daily_post,
+		Post:pallet_posts,
 	}
 );
 
